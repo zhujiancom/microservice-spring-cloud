@@ -34,7 +34,8 @@ public class UserController {
 
     @GetMapping("/eureka-instance")
     public String serviceUrl() {
-        InstanceInfo instance = eurekaClient.getNextServerFromEureka("MICROSERVICE-PROVIDER-USER", false);
+        // 虚拟主机名称区分大小写 microservice-provider-user
+        InstanceInfo instance = eurekaClient.getNextServerFromEureka("microservice-provider-user", false);
         return instance.getHomePageUrl();
     }
 
