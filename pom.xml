@@ -25,6 +25,7 @@
 		<module>microservice-consumer-movie-feign</module>
 		<module>microservice-consumer-movie-feign-customizing</module>
 		<module>microservice-discovery-eureka-ha</module>
+		<module>microservice-consumer-movie-ribbon-with-hystirx</module>
 	</modules>
 
 	<properties>
