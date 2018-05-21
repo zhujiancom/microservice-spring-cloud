@@ -1,0 +1,22 @@
+server:
+  port: 8031
+eureka:
+  client:
+    service-url:
+      defaultZone: http://user:password@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+spring:
+  application:
+    name: microservice-hystrix-turbine
+
+turbine:
+  aggregator:
+    clusterConfig: default #指定聚合哪些集群，多个使用","分割，默认为default，可使用http://.../turbine.stream?cluster={clusterConfig之一}访问
+  app-config: microservice-consumer-movie-ribbon-with-hystrix,microservice-provider-user #配置eureka中的serviceId列表，表明监控哪些服务
+  cluster-name-expression: "'default'"
+  #1. turbine.cluster-name-expression指定集群名称，默认表达式为appName;此时aggregator.clusterConfig需要配置想要监控的应用名称
+  #2. 当turbine.cluster-name-expression = default时, turbine.aggregator.clusterConfig 可以不写，因为默认是default
+  #3. 当turbine.cluster-name-expression = metadata['cluster']时，假设想要监控的应用配置了eureka.instance.eureka.instance.metadata-map.cluster: ABC,
+    # 则需要同时配置turbine.aggregator.clusterConfig: ABC
+
