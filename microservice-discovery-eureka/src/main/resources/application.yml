@@ -12,10 +12,11 @@ eureka:
     fetch-registry: false
     healthcheck:
       enable: true
-security:
-  basic:
-    enabled: true
-  user:
-    name: user
-    password: password
+spring:
+  security:
+    basic:
+      enabled: true
+    user:
+      name: user
+      password: password
 

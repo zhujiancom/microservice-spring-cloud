@@ -1,4 +1,9 @@
-
+security:
+  basic:
+    enabled: true
+  user:
+    name: user
+    password: password
 server:
   port: 8040
 eureka:
@@ -9,11 +14,28 @@ eureka:
       enable: true
     instance:
       prefer-ip-address: true
+      lease-renewal-interval-in-seconds: 10
 spring:
   application:
     name: microservice-gateway-zuul
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 5000
 zuul:
   ignored-services: '*'
   routes:
-    users: /microservice-provider-user/**
-
+    users:
+      path: /user/**
+      serviceId: microservice-provider-user
+    movies:
+      path: /movie/**
+      serviceId: microservice-consumer-movie-ribbon
+ribbon:
+  eureka:
+    enable: false
+  ConnectionTimeout: 3000
+  ReadTimeout: 6000           #解决通过zuul大文件上传超时问题
+microservice-provider-user:
+  ribbon:
+    listOfServers: http://localhost:7900,http://localhost:7901
+microservice-consumer-movie-ribbon:
+  ribbon:
+    listOfServers: http://localhost:8010

@@ -1,0 +1,15 @@
+
+server:
+  port: 8762
+eureka:
+  server:
+    eviction-interval-timer-in-ms: 4000
+    enable-self-preservation: false
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8762/eureka
+    register-with-eureka: false       #单机应用， false表示不把eureka当做client，只作为server使用
+    fetch-registry: false
+    healthcheck:
+      enable: true
+

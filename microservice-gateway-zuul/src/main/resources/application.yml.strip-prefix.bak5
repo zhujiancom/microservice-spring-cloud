@@ -1,0 +1,21 @@
+
+server:
+  port: 8040
+eureka:
+  client:
+    service-url:
+      defaultZone: http://user:password@localhost:8761/eureka
+    healthcheck:
+      enable: true
+    instance:
+      prefer-ip-address: true
+spring:
+  application:
+    name: microservice-gateway-zuul
+zuul:
+  prefix: /simple
+  strip-prefix: false   #使用场景： 如果微服务配置了context-path, 则需要配置zuul.prefix = context-path 并且 strip-prefix= false
+logging:
+  level:
+    com.netflix: debug
+
